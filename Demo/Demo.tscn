@@ -53,9 +53,6 @@ material/0 = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="Floor"]
 shape = SubResource( 3 )
 
-[node name="FullPhysicalKeyboard" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17457, -1.721 )
-
 [node name="FPController" parent="." instance=ExtResource( 6 )]
 
 [node name="ARVRCamera" parent="FPController" index="1"]
@@ -135,6 +132,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.84699, -3.55659 )
 
 [node name="KeyboardDesk" parent="." instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.778 )
+
+[node name="FullPhysicalKeyboard" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25335, -1.70682 )
 
 [editable path="FPController"]
 [editable path="XRToolsPhysicsHands"]
