@@ -43,6 +43,14 @@ func on_keyboard_key_pressed(key_text):
 	if key_text == "BKSP":
 		scan_code = OS.find_scancode_from_string("BackSpace")
 		
+	if key_text == "<":
+		scan_code = OS.find_scancode_from_string("Less")
+		unicode = 60
+		
+	if key_text == ">":
+		scan_code = OS.find_scancode_from_string("Greater")
+		unicode = 62
+		
 	if key_text == ",":
 		scan_code = OS.find_scancode_from_string("Comma")
 		unicode = 44
