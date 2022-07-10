@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://addons/godot-xr-tools/objects/PhysicalKeyboard3-5/KeyLiberationFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Demo/deskmaterial.tres" type="Material" id=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 1.5, 0.1, 0.5 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( 0.713725, 0.05, 0.240998, -0.686275, -0.05, -0.231729, -0.686275, -0.05, 0.231729, -0.713725, 0.05, -0.240998, 0.686275, -0.05, -0.231729, -0.713725, 0.05, 0.240998, 0.713725, 0.05, -0.240998, 0.686275, -0.05, 0.231729 )
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 1, 0.05, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+albedo_color = Color( 0.713726, 0.419608, 0.0352941, 1 )
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( 0.463455, 0.025, 0.0480769, -0.463462, -0.025, -0.0480769, -0.463462, -0.025, 0.0480769, 0.463455, -0.025, -0.0480769, -0.463462, 0.025, -0.0480769, 0.463455, -0.025, 0.0480769, -0.463462, 0.025, 0.0480769, 0.463455, 0.025, -0.0480769 )
+
+[sub_resource type="TextMesh" id=6]
+text = "Keyboard"
+font = ExtResource( 1 )
+pixel_size = 0.0005
+depth = 0.002
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+albedo_color = Color( 0.843137, 0.411765, 0.0980392, 1 )
+
+[sub_resource type="ConvexPolygonShape" id=8]
+points = PoolVector3Array( -0.113302, -0.0271898, 0.00106945, -0.0318853, 0.094218, 0.00106945, 0.26609, -0.000949752, 0.00106945, -0.0456795, 0.094218, -0.00168982, 0.26609, 0.0942061, 0.00106945, -0.26369, 0.08868, 0.00106945, -0.26369, -0.000973523, 0.00106945, -0.0995079, -0.0271898, 0.00106945 )
+
+[sub_resource type="ConvexPolygonShape" id=9]
+points = PoolVector3Array( -0.113302, -0.0271898, 0.00106945, -0.0318853, 0.094218, 0.00106945, 0.26609, -0.000949752, 0.00106945, -0.0456795, 0.094218, -0.00168982, 0.26609, 0.0942061, 0.00106945, -0.26369, 0.08868, 0.00106945, -0.26369, -0.000973523, 0.00106945, -0.0995079, -0.0271898, 0.00106945 )
+
+[node name="KeyboardDesk" type="StaticBody"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085105, -0.012868 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085105, -0.012868 )
+shape = SubResource( 5 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.257463 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.257463 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.257463 )
+shape = SubResource( 9 )

@@ -1,0 +1,140 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://addons/godot-xr-tools/assets/PlayerBody.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/godot-xr-tools/objects/FullPhysicalKeyboard.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/godot-xr-tools/assets/LeftHand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/godot-xr-tools/functions/Function_Direct_movement.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/godot-xr-tools/assets/RightHand.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Demo/TextEntryTestViewport3D.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/follow_bone_3d/XRToolsPhysicsHands.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/godot-xr-tools/functions/Function_Turn_movement.tscn" type="PackedScene" id=9]
+[ext_resource path="res://addons/godot-xr-tools/functions/Function_Pickup.tscn" type="PackedScene" id=10]
+[ext_resource path="res://addons/godot-xr-tools/functions/Function_pointer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Demo/KeyboardDesk.tscn" type="PackedScene" id=12]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 10, 0.25, 10 )
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+albedo_color = Color( 0.513726, 0.439216, 0.439216, 1 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( -5.03913, -0.16437, -5.03937, 5.03937, 0.150591, 5.03937, -5.03913, 0.150591, 5.03937, 5.03937, -0.16437, 5.03937, 5.03937, 0.150591, -5.03937, -5.03913, -0.16437, 5.03937, -5.03913, 0.150591, -5.03937, 5.03937, -0.16437, -5.03937 )
+
+[sub_resource type="SphereMesh" id=4]
+radius = 0.8
+height = 1.6
+
+[sub_resource type="SphereShape" id=5]
+margin = 0.01
+radius = 0.8
+
+[sub_resource type="SphereShape" id=6]
+margin = 0.01
+radius = 0.8
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 0.8, 0.2, 0.8 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 0.8, 0.2, 0.8 )
+
+[node name="Demo" type="Spatial"]
+
+[node name="Floor" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+shape = SubResource( 3 )
+
+[node name="FullPhysicalKeyboard" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17457, -1.721 )
+
+[node name="FPController" parent="." instance=ExtResource( 6 )]
+
+[node name="ARVRCamera" parent="FPController" index="1"]
+far = 1000.0
+
+[node name="LeftHand" parent="FPController/LeftHandController" index="0" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, -0.05, 0.15 )
+
+[node name="Function_Direct_movement" parent="FPController/LeftHandController" index="1" instance=ExtResource( 4 )]
+max_speed = 3.0
+strafe = true
+
+[node name="Function_Pickup" parent="FPController/LeftHandController" index="2" instance=ExtResource( 10 )]
+grab_distance = 0.1
+
+[node name="Function_pointer" parent="FPController/LeftHandController" index="3" instance=ExtResource( 11 )]
+show_laser = false
+
+[node name="RightHand" parent="FPController/RightHandController" index="0" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, -0.05, 0.15 )
+
+[node name="Function_Turn_movement" parent="FPController/RightHandController" index="1" instance=ExtResource( 9 )]
+smooth_rotation = true
+
+[node name="Function_Pickup" parent="FPController/RightHandController" index="2" instance=ExtResource( 10 )]
+grab_distance = 0.1
+
+[node name="Function_pointer" parent="FPController/RightHandController" index="3" instance=ExtResource( 11 )]
+show_laser = false
+
+[node name="PlayerBody" parent="FPController" instance=ExtResource( 1 )]
+collision_mask = 1021
+
+[node name="XRToolsPhysicsHands" parent="." instance=ExtResource( 8 )]
+
+[node name="LHFollowBone3D" parent="XRToolsPhysicsHands" index="0"]
+transform = Transform( -0.0316173, 0.0127275, -0.000628471, -0.000167084, -0.00209511, -0.0340238, -0.0127419, -0.0315541, 0.0020056, -0.529683, 0.984693, -0.505956 )
+selected_bone = 7
+
+[node name="KinematicBody" parent="XRToolsPhysicsHands/LHFollowBone3D" index="0"]
+collision_layer = 393216
+collision_mask = 393216
+
+[node name="DebugMesh" parent="XRToolsPhysicsHands/LHFollowBone3D/KinematicBody" index="0"]
+mesh = SubResource( 4 )
+
+[node name="KCollisionShape" parent="XRToolsPhysicsHands/LHFollowBone3D/KinematicBody" index="1"]
+shape = SubResource( 5 )
+
+[node name="RHFollowBone3D" parent="XRToolsPhysicsHands" index="1"]
+transform = Transform( 0.0316173, -0.0127275, 0.000628471, -0.000167084, -0.00209511, -0.0340238, -0.0127419, -0.0315541, 0.0020056, 0.529683, 0.984693, -0.505956 )
+selected_bone = 7
+
+[node name="KinematicBody" parent="XRToolsPhysicsHands/RHFollowBone3D" index="0"]
+collision_layer = 393216
+collision_mask = 393216
+
+[node name="KCollisionShape" parent="XRToolsPhysicsHands/RHFollowBone3D/KinematicBody" index="0"]
+shape = SubResource( 6 )
+
+[node name="LPalmFollowBone3D" parent="XRToolsPhysicsHands" index="2"]
+transform = Transform( -0.0339721, -0.00281232, -0.000149438, -0.000176133, 0.00392693, -0.0338613, 0.00281077, -0.0337447, -0.00392804, -0.53, 0.949478, -0.360575 )
+selected_bone = 8
+
+[node name="KCollisionShape" parent="XRToolsPhysicsHands/LPalmFollowBone3D/KinematicBody" index="1"]
+shape = SubResource( 7 )
+
+[node name="RPalmFollowBone3D" parent="XRToolsPhysicsHands" index="3"]
+transform = Transform( 0.0339721, 0.00281231, 0.000149437, -0.000176133, 0.00392693, -0.0338613, 0.00281077, -0.0337447, -0.00392804, 0.53, 0.949478, -0.360575 )
+selected_bone = 8
+
+[node name="KCollisionShape" parent="XRToolsPhysicsHands/RPalmFollowBone3D/KinematicBody" index="1"]
+shape = SubResource( 8 )
+
+[node name="TextEntryTest" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.84699, -3.55659 )
+
+[node name="KeyboardDesk" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.778 )
+
+[editable path="FPController"]
+[editable path="XRToolsPhysicsHands"]

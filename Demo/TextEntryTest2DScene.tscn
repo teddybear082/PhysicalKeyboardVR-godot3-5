@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/godot-xr-tools/objects/PhysicalKeyboard3-5/liberation-sans/LiberationSans-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 1 )
+
+[node name="TextEntryTest2DScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LineEdit" type="LineEdit" parent="."]
+margin_right = 801.0
+margin_bottom = 199.0
+custom_fonts/font = SubResource( 1 )
+caret_blink = true
