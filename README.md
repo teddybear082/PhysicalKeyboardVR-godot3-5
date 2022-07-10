@@ -24,11 +24,14 @@ This allows both palms and fingers to be used for those items.
 
 Mask 19 would be used for JUST the keyboard.  This prevents the physics palms from interfering while typing.
 
-##Demo Scene##
+
+**Demo Scene**
 
 To test it out, just download the code zip, open in Godot in Godot 3.5 or more, and everything should work out of the box.
 
-##To Use in Your Own Game##
+
+
+**To Use in Your Own Game**
 
 To use in your own game there are a few prerequisites:
 
